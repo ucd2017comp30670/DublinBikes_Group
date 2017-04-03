@@ -59,7 +59,7 @@ def populate():
                     rowlist.append(temp)
                     rowlist1 = tuple(rowlist)
             #print (rowlist1)
-            INPUT = "INSERT INTO dublin_bikes_dynamic VALUES {0}".format(rowlist1)
+            INPUT = "INSERT INTO dublin_bikes_dynamic_updated VALUES {0}".format(rowlist1)
             curs.execute(INPUT)
         conn.commit()
         curs.close()
