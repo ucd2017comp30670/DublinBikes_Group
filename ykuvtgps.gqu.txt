@@ -1,0 +1,8 @@
+﻿Merge branch 'database' of https://github.com/ucd2017comp30670/DublinBikes_Group into database
+
+# Please enter a commit message to explain why this merge is necessary,
+# especially if it merges an updated upstream into a topic branch.
+#
+# Lines starting with '#' will be ignored, and an empty message aborts
+# the commit.
+

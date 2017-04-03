@@ -2,6 +2,7 @@ import sys
 import logging
 import src.rds_config
 import pymysql
+import os
 import requests
 import json
 import time
