@@ -2,7 +2,7 @@ import sys
 import logging
 import src.rds_config
 import pymysql
-import os
+#import os
 import requests
 import json
 import time
@@ -40,6 +40,7 @@ def populate():
         status VARCHAR(10) NOT NULL,
         banking VARCHAR(45) NOT NULL,
         bike_stands INT(4) NOT NULL,
+        bonus VARCHAR(45) NOT NULL,
         available_bike_stands INT(4) NOT NULL,
         available_bikes INT(4) NOT NULL,        
         last_update BIGINT(15) NOT NULL
@@ -53,7 +54,7 @@ def populate():
             line = result[i]
             for a,b in line.items():
                 temp = b
-                if a == "position" or a== "address" or a =="contract_name" or a == "bonus":
+                if a == "position" or a== "address" or a =="contract_name":
                     pass
                 else:
                     rowlist.append(temp)
