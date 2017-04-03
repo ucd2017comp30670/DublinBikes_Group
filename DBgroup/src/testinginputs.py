@@ -1,6 +1,6 @@
 import sys
 import logging
-import src.rds_config
+from src import rds_config
 import pymysql
 import os
 import requests
@@ -8,10 +8,10 @@ import json
 import time
 
 
-rds_host = src.rds_config.db_endpoint
-name = src.rds_config.db_username
-password = src.rds_config.db_password
-db_name = src.rds_config.db_name
+rds_host = rds_config.db_endpoint
+name = rds_config.db_username
+password = rds_config.db_password
+db_name = rds_config.db_name
 port = 3306
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -21,6 +21,8 @@ STATIONS_URL = "https://api.jcdecaux.com/vls/v1/stations"
 try:
     conn = pymysql.connect(rds_host, user=name,
     passwd=password, db=db_name, connect_timeout=10000)
+    
+    print('yup')
     test = True
     
     
@@ -29,17 +31,16 @@ except:
     test = False
     sys.exit()
 
-def populate():
-    while test == True:
-        conn = pymysql.connect(rds_host, user=name,
-        passwd=password, db=db_name, connect_timeout=10000)
+def parse():
+    if test == True:
+#         conn = pymysql.connect(rds_host, user=name,
+#         passwd=password, db=db_name, connect_timeout=10000)
         curs = conn.cursor()
-        sql = '''CREATE TABLE IF NOT EXISTS dublin_bikes_dynamic_updated(
+        sql = '''CREATE TABLE IF NOT EXISTS DublinBikestest101(
         number INT(4) NOT NULL,
         name VARCHAR(45) NOT NULL,
         status VARCHAR(10) NOT NULL,
         bike_stands INT(4) NOT NULL,
-        bonus VARCHAR(45) NOT NULL,
         available_bike_stands INT(4) NOT NULL,
         available_bikes INT(4) NOT NULL,        
         last_update BIGINT(15) NOT NULL
@@ -49,24 +50,25 @@ def populate():
         result = json.loads(r.text)
         
         for i in range(101):
-            rowlist = [] 
+            rowlist = []
             line = result[i]
             for a,b in line.items():
                 temp = b
-                if a == "position" or a== "address" or a =="contract_name" or a == "bonus":
+                if a == "position" or a== "address" or a =="contract_name" or a == "bonus" or a == "banking": 
                     pass
                 else:
                     rowlist.append(temp)
                     rowlist1 = tuple(rowlist)
-            #print (rowlist1)
-            INPUT = "INSERT INTO dublin_bikes_dynamic VALUES {0}".format(rowlist1)
+            print (rowlist1)
+                 
+
+            INPUT = "INSERT INTO DublinBikestest101 VALUES {0}".format(rowlist1)
+            #print (INPUT)
             curs.execute(INPUT)
         conn.commit()
         curs.close()
-        print('done')
-        time.sleep(5*60)
-
-
-
-if __name__ == "__main__":
-    populate()
+        
+            #print (line.values())      
+        
+            
+parse()
