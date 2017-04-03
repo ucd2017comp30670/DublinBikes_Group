@@ -54,7 +54,7 @@ def populate():
             line = result[i]
             for a,b in line.items():
                 temp = b
-                if a == "position" or a== "address" or a =="contract_name":
+                if a == "position" or a== "address" or a =="contract_name":   
                     pass
                 else:
                     rowlist.append(temp)
