@@ -29,6 +29,8 @@ except:
     test = False
     sys.exit()
 
+dfajlk
+
 def populate():
     while test == True:
         conn = pymysql.connect(rds_host, user=name,
